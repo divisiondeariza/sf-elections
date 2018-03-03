@@ -1,0 +1,37 @@
+h1{
+	padding-top:50px;
+	width: auto;
+	text-align: center;
+}
+
+.instructions{
+	width: auto;
+	text-align: center;
+}
+
+.start-btn-container{
+	width: auto;
+	text-align: center;
+}
+.start-btn {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  background: #000000;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  width: 30%;
+
+  &:hover {
+	  background: #3cb0fd;
+	  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+	  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+	  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+	  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+	  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+	  text-decoration: none;
+	}
+}
