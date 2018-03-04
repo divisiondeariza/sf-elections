@@ -12,7 +12,7 @@ import { Candidate } from '../candidate';
   styleUrls: ['./cmp-candidates.component.scss']
 })
 export class CmpCandidatesComponent implements OnInit {
-  candidates: Observable<Candidate[]>
+  candidates: Candidate[]
 
   constructor(private candidatesService: SvCandidatesService ) { }
 
@@ -21,8 +21,8 @@ export class CmpCandidatesComponent implements OnInit {
   }
 
   getCandidates(){
-  	this.candidates = this.candidatesService.getCandidates().pipe(
-  		// catchError( (err: any) => {console.log(err.msg); return of("")}),
+  	this.candidatesService.getCandidates().subscribe(
+  		candidates => this.candidates = candidates
   	)
   }
 

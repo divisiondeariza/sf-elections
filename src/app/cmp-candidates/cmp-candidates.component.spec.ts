@@ -36,6 +36,9 @@ describe('CmpCandidatesComponent', () => {
   });
 
   it('should get candidates and display them', () =>{
+      const candidatesInDom = fixture.nativeElement.querySelectorAll(".candidate");
+      expect(candidatesInDom.length).toEqual(2);
       expect(getCandidatesSpy.calls.any()).toBe(true, 'getCandidates called');
   });
+
 });
