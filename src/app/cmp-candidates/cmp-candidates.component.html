@@ -1,5 +1,6 @@
 <div class="candidates-container">
-	<span *ngFor="let candidate of candidates" class="candidate">
+	<div *ngFor="let candidate of candidates" class="candidate">
+		<div class="candidate-name">{{candidate.name}}</div>
 		<img src="assets/candidates_pics/{{candidate.id}}_j.jpg"/>
-	</span>
+	</div>
 </div>

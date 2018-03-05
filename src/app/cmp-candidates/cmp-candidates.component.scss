@@ -1,16 +1,41 @@
 
 .candidates-container{
+	text-align: center;
 
 	.candidate{
-		img{
+		display: inline-block;
+
+
+		.candidate-name{
 			width: 150px;
-			margin: 20px;
+			text-align: center;
+			margin-left: auto;
+			margin-right: auto;
+			z-index: 99;
+			border-width: 1px;
+			border-color: black;
+			border-style: solid;
+			visibility: hidden;
+			line-height: 1;
+			padding: 5px;
+			font-size: 12px;
 		}
 
-		@for $i from 1 to 5 {
-			&:nth-child(4n + #{$i}){
-				img{
-					box-shadow: if($i == 3 or $i == 2 , 10px, -10px) if($i > 2 , 10px, -10px)   blue;
+		img{
+			width: 150px;
+			margin:10px;
+		}
+
+		&:hover{
+			.candidate-name{
+				visibility: visible;
+			}
+
+			@for $i from 1 to 5 {
+				&:nth-child(4n + #{$i}){
+					img{
+						box-shadow: if($i == 3 or $i == 2 , 10px, -10px) if($i > 2 , 10px, -10px)   blue;
+					}
 				}
 			}
 		}
