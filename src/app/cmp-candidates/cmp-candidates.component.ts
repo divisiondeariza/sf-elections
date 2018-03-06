@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { SvCandidatesService } from '../sv-candidates/sv-candidates.service';
 import { catchError } from 'rxjs/operators';
@@ -12,6 +12,8 @@ import { Candidate } from '../candidate';
   styleUrls: ['./cmp-candidates.component.scss']
 })
 export class CmpCandidatesComponent implements OnInit {
+  @Input() selected: String[];
+  @Output() selectedChange = new EventEmitter<String[]>()
   candidates: Candidate[]
 
   constructor(private candidatesService: SvCandidatesService ) { }
@@ -24,6 +26,15 @@ export class CmpCandidatesComponent implements OnInit {
   	this.candidatesService.getCandidates().subscribe(
   		candidates => this.candidates = candidates
   	)
+  }
+
+  clickCandidate(id:String){
+    const index = this.selected.indexOf(id);
+    if(index == -1)
+      this.selected.push(id)
+    else
+      this.selected.splice(index, 1)
+    this.selectedChange.emit(this.selected);
   }
 
 }

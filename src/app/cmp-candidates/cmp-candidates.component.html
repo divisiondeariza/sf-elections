@@ -1,5 +1,7 @@
 <div class="candidates-container">
-	<div *ngFor="let candidate of candidates" class="candidate">
+	<div *ngFor="let candidate of candidates" class="candidate" 
+		[class.selected]="selected.indexOf(candidate.id) != -1" 
+		(click) = "clickCandidate(candidate.id)">
 		<div class="candidate-name">{{candidate.name}}</div>
 		<img src="assets/candidates_pics/{{candidate.id}}_j.jpg"/>
 	</div>
