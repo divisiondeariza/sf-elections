@@ -72,6 +72,14 @@ describe('CmpCandidatesComponent', () => {
 
   });
 
+  it('should let remove from select candidates when limit reached', () =>{
+    component.limit = 1;
+    const lastCandidate = fixture.debugElement.query(By.css('.candidate:first-of-type')).nativeElement;
+    lastCandidate.click();
+    expect(selectedCandidates.length).toEqual(0)
+
+  });
+
   it('should emit selectedChange event', () =>{
     let outputSelected: String[];
     component.selectedChange.subscribe((value) => outputSelected = value);

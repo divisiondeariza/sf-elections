@@ -30,18 +30,20 @@ export class CmpCandidatesComponent implements OnInit {
   }
 
   clickCandidate(id:String){
-    if(this.limit == undefined || this.selected.length < this.limit){
-      this.toggleCandidate(id);
+    const index = this.selected.indexOf(id);
+    if(index == -1){
+      this.setCandidateIfNoLimitReached(id);
     }
+    else
+      this.selected.splice(index, 1)
+    this.selectedChange.emit(this.selected);   
+
   }
 
-  private toggleCandidate(id:String){
-      const index = this.selected.indexOf(id);
-      if(index == -1)
+  private setCandidateIfNoLimitReached(id:String){
+    if(this.limit == undefined || this.selected.length < this.limit){
         this.selected.push(id)
-      else
-        this.selected.splice(index, 1)
-      this.selectedChange.emit(this.selected);    
+    }
   }
 
 }
