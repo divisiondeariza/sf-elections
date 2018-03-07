@@ -12,7 +12,7 @@ export class SvCandidatesService {
   ) { }
 
   getCandidates ():Observable<Candidate[]>{
-  	return this.http.get<Candidate[]>("/assets/data/candidates.json")
+  	return this.http.get<Candidate[]>("assets/data/candidates.json")
   }
 
 }

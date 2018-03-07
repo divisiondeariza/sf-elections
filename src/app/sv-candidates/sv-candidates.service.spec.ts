@@ -33,7 +33,7 @@ describe('SvCandidatesService', () => {
 	  service.getCandidates()
 	  		.subscribe(candidates => expect(candidates).toEqual(expectedCandidates))
 
-	  const req = httpTestingController.expectOne("/assets/data/candidates.json");
+	  const req = httpTestingController.expectOne("assets/data/candidates.json");
 	  expect(req.request.method).toEqual('GET');
 
 	  req.flush(expectedCandidates)

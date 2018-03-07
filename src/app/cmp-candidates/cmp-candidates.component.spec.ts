@@ -14,8 +14,7 @@ describe('CmpCandidatesComponent', () => {
   let candidates: Candidate[];
   let selectedCandidates: String[];
   let getCandidatesSpy: jasmine.Spy;
-/*  let selectedDe: DebugElement;
-  let selectedEl: HTMLElement;*/
+
 
   beforeEach(async(() => {
     candidates = [{ id: 'one', name: 'Candidate One' }, { id: 'two', name: 'Candidate Two' }];
@@ -65,12 +64,20 @@ describe('CmpCandidatesComponent', () => {
     expect(selectedCandidates).not.toContain('one')
   });
 
+  it('should not select more candidates than allowed by limit', () =>{
+    component.limit = 1;
+    const lastCandidate = fixture.debugElement.query(By.css('.candidate:last-of-type')).nativeElement;
+    lastCandidate.click();
+    expect(selectedCandidates.length).toEqual(1)
+
+  });
+
   it('should emit selectedChange event', () =>{
     let outputSelected: String[];
     component.selectedChange.subscribe((value) => outputSelected = value);
     const lastCandidate = fixture.debugElement.query(By.css('.candidate:last-of-type')).nativeElement;
     lastCandidate.click();
     expect(outputSelected).toContain('two')
-  })
+  });
 
 });

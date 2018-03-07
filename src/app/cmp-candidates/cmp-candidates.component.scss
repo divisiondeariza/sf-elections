@@ -23,7 +23,7 @@
 
 		img{
 			width: 150px;
-			margin:10px;
+			margin:15px;
 		}
 
 		&:hover{
@@ -31,15 +31,17 @@
 				visibility: visible;
 			}
 
-			@for $i from 1 to 5 {
-				&:nth-child(4n + #{$i}){
-					img{
-						box-shadow: if($i == 3 or $i == 2 , 10px, -10px) if($i > 2 , 10px, -10px)   blue;
-					}
-				}
-			}
+
 		}
 	}
 
-
+	.selected{
+		@for $i from 1 to 5 {
+			&:nth-child(4n + #{$i}){
+				img{
+					box-shadow: if($i == 3 or $i == 2 , 10px, -10px) if($i > 2 , 10px, -10px)   blue;
+				}
+			}
+		}		
+	}
 }

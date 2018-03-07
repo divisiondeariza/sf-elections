@@ -13,8 +13,9 @@ import { Candidate } from '../candidate';
 })
 export class CmpCandidatesComponent implements OnInit {
   @Input() selected: String[];
-  @Output() selectedChange = new EventEmitter<String[]>()
-  candidates: Candidate[]
+  @Input() limit: Number;
+  @Output() selectedChange = new EventEmitter<String[]>();
+  candidates: Candidate[];
 
   constructor(private candidatesService: SvCandidatesService ) { }
 
@@ -25,16 +26,22 @@ export class CmpCandidatesComponent implements OnInit {
   getCandidates(){
   	this.candidatesService.getCandidates().subscribe(
   		candidates => this.candidates = candidates
-  	)
+      )
   }
 
   clickCandidate(id:String){
-    const index = this.selected.indexOf(id);
-    if(index == -1)
-      this.selected.push(id)
-    else
-      this.selected.splice(index, 1)
-    this.selectedChange.emit(this.selected);
+    if(this.limit == undefined || this.selected.length < this.limit){
+      this.toggleCandidate(id);
+    }
+  }
+
+  private toggleCandidate(id:String){
+      const index = this.selected.indexOf(id);
+      if(index == -1)
+        this.selected.push(id)
+      else
+        this.selected.splice(index, 1)
+      this.selectedChange.emit(this.selected);    
   }
 
 }
