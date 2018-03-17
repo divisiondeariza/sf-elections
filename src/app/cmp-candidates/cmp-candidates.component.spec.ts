@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { CmpCandidatesComponent } from './cmp-candidates.component';
@@ -6,6 +6,9 @@ import { SvCandidatesService } from '../sv-candidates/sv-candidates.service';
 import { Candidate } from '../candidate';
 
 import { of } from 'rxjs/observable/of';
+
+import { AlertModule } from 'ngx-bootstrap/alert';
+
 
 
 describe('CmpCandidatesComponent', () => {
@@ -23,7 +26,9 @@ describe('CmpCandidatesComponent', () => {
     
     TestBed.configureTestingModule({
       declarations: [ CmpCandidatesComponent ],
-      providers: [{provide:  SvCandidatesService, useValue: candidatesService}]
+      providers: [{provide:  SvCandidatesService, useValue: candidatesService}],
+      imports: [AlertModule.forRoot()]
+      
     })
     .compileComponents();
   }));
@@ -64,22 +69,6 @@ describe('CmpCandidatesComponent', () => {
     expect(selectedCandidates).not.toContain('one')
   });
 
-  it('should not select more candidates than allowed by limit', () =>{
-    component.limit = 1;
-    const lastCandidate = fixture.debugElement.query(By.css('.candidate:last-of-type')).nativeElement;
-    lastCandidate.click();
-    expect(selectedCandidates.length).toEqual(1)
-
-  });
-
-  it('should let remove from select candidates when limit reached', () =>{
-    component.limit = 1;
-    const lastCandidate = fixture.debugElement.query(By.css('.candidate:first-of-type')).nativeElement;
-    lastCandidate.click();
-    expect(selectedCandidates.length).toEqual(0)
-
-  });
-
   it('should emit selectedChange event', () =>{
     let outputSelected: String[];
     component.selectedChange.subscribe((value) => outputSelected = value);
@@ -88,4 +77,80 @@ describe('CmpCandidatesComponent', () => {
     expect(outputSelected).toContain('two')
   });
 
+  describe('limit reached:', () => {
+
+    it('should not select more candidates than allowed by limit', () =>{
+      component.limit = 1;
+      const lastCandidate = fixture.debugElement.query(By.css('.candidate:last-of-type')).nativeElement;
+      lastCandidate.click();
+      expect(selectedCandidates.length).toEqual(1)
+
+    });
+
+    it('should let remove from select candidates when limit reached', () =>{
+      component.limit = 1;
+      const firstCandidate = fixture.debugElement.query(By.css('.candidate:first-of-type')).nativeElement;
+      firstCandidate.click();
+      expect(selectedCandidates.length).toEqual(0)
+
+    });
+
+    it('should show an alert when try to exceed limit of selected candidates', () =>{
+      component.limit = 1;
+      const lastCandidate = fixture.debugElement.query(By.css('.candidate:last-of-type')).nativeElement;
+      lastCandidate.click();
+      fixture.detectChanges();
+      const alert = fixture.debugElement.query(By.css('alert'));
+      expect(alert.componentInstance.type).toBe("warning");
+      console.log(alert);
+      expect(alert.nativeElement.innerText).toContain("Alerta, solo puede seleccionar hasta 1 candidatos.");
+      
+    });
+
+    it('should not show alert when not reached limit', () =>{
+      const alert = fixture.debugElement.query(By.css('alert'));
+      expect(alert).toBeNull();
+    });
+
+    it('should dismiss alert aftet 5 seconds', fakeAsync(() =>{
+      component.limit = 1;
+      const lastCandidate = fixture.debugElement.query(By.css('.candidate:last-of-type')).nativeElement;
+      lastCandidate.click();
+      fixture.detectChanges();
+      tick(4999);
+      fixture.detectChanges();
+      const alert = fixture.debugElement.query(By.css('alert'));
+      tick(2);
+      fixture.detectChanges();
+      expect(component.alerts.length).toBe(0);
+    }));
+
+    it('should show alert again when limit tried to be surpassed again', fakeAsync(() =>{
+      component.limit = 1;
+      const lastCandidate = fixture.debugElement.query(By.css('.candidate:last-of-type')).nativeElement;
+      lastCandidate.click();
+      fixture.detectChanges();
+      tick(5000);
+      fixture.detectChanges();
+      lastCandidate.click();
+      fixture.detectChanges();
+      const alert = fixture.debugElement.query(By.css('alert'));
+      expect(alert.nativeElement).not.toEqual('');
+      tick(5000);
+    }));
+
+    it('should only show one alert at a time', () =>{
+      component.limit = 1;
+      const lastCandidate = fixture.debugElement.query(By.css('.candidate:last-of-type')).nativeElement;
+      lastCandidate.click();
+      fixture.detectChanges();
+      lastCandidate.click();
+      fixture.detectChanges();
+
+      const alerts:DebugElement[] = fixture.debugElement.queryAll(By.css('alert'));
+      expect(alerts.length).toBe(1);
+      
+    });
+
+  })
 });

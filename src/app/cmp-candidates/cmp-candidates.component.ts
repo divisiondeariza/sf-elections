@@ -5,6 +5,8 @@ import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 import { Candidate } from '../candidate';
 
+import { AlertComponent } from 'ngx-bootstrap/alert/alert.component';
+
 
 @Component({
   selector: 'app-cmp-candidates',
@@ -16,6 +18,7 @@ export class CmpCandidatesComponent implements OnInit {
   @Input() limit: Number;
   @Output() selectedChange = new EventEmitter<String[]>();
   candidates: Candidate[];
+  alerts:any[] = []
 
   constructor(private candidatesService: SvCandidatesService ) { }
 
@@ -40,10 +43,22 @@ export class CmpCandidatesComponent implements OnInit {
 
   }
 
-  private setCandidateIfNoLimitReached(id:String){
+  setCandidateIfNoLimitReached(id:String){
     if(this.limit == undefined || this.selected.length < this.limit){
         this.selected.push(id)
+    }else if(this.alerts.length == 0){
+      this.alerts.push({
+      type: 'warning',
+      msg: `Alerta, solo puede seleccionar hasta ${this.limit} candidatos.`,
+      timeout: 5000
+    })
     }
   }
+
+  onClosed(dismissedAlert: AlertComponent): void {
+    this.alerts = this.alerts.filter(alert => alert !== dismissedAlert);
+  }
+
+
 
 }

@@ -11,6 +11,8 @@ import { SvCandidatesService } from './sv-candidates/sv-candidates.service';
 
 import { HttpClientModule }    from '@angular/common/http';
 
+import { AlertModule } from 'ngx-bootstrap/alert';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +22,9 @@ import { HttpClientModule }    from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+
+    AlertModule.forRoot()
   ],
   providers: [SvCandidatesService],
   bootstrap: [AppComponent]
