@@ -102,6 +102,7 @@ describe('CmpCandidatesComponent', () => {
       fixture.detectChanges();
       const alert = fixture.debugElement.query(By.css('alert'));
       expect(alert.componentInstance.type).toBe("warning");
+      expect(alert.componentInstance.dismissible).toBeTruthy();
       console.log(alert);
       expect(alert.nativeElement.innerText).toContain("Alerta, solo puede seleccionar hasta 1 candidatos.");
       
