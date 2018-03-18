@@ -16,6 +16,7 @@ import { AlertComponent } from 'ngx-bootstrap/alert/alert.component';
 export class CmpCandidatesComponent implements OnInit {
   @Input() selected: String[];
   @Input() limit: Number;
+  @Input() isPrincipal:Boolean = true;
   @Output() selectedChange = new EventEmitter<String[]>();
   candidates: Candidate[];
   alerts:any[] = []

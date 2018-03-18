@@ -77,6 +77,12 @@ describe('CmpCandidatesComponent', () => {
     expect(outputSelected).toContain('two')
   });
 
+  describe("isPrincipal property", () =>{
+    it('should have isPrincipal property as true by default', () => {
+      expect(component.isPrincipal).toBeTruthy();
+    });
+  });
+
   describe('limit reached:', () => {
 
     it('should not select more candidates than allowed by limit', () =>{

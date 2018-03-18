@@ -7,7 +7,7 @@
   </alert>
 </div>
 
-<div class="candidates-container">
+<div class="candidates-container" [class.small-container] = "!isPrincipal">
 	<div *ngFor="let candidate of candidates" class="candidate" 
 		[class.selected]="selected.indexOf(candidate.id) != -1" 
 		(click) = "clickCandidate(candidate.id)">

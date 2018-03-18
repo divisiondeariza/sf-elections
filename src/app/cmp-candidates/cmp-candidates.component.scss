@@ -45,3 +45,39 @@
 		}		
 	}
 }
+
+.small-container{
+	.candidate{
+		position: relative;
+		margin: 0 auto;
+		.candidate-name{
+			width: 100%;
+			position: absolute;
+			background-color: rgba(255, 255, 255, 0.5);;
+			border-width: 0;
+			height: 100%;
+			vertical-align: center;
+			padding-top: 20%;
+			text-shadow: 2px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;
+
+		}		
+
+		img{
+			width: auto;
+			max-width: 70px;
+			margin: 5px;
+		}
+	}
+
+	.selected{
+		@for $i from 1 to 5 {
+			&:nth-child(4n + #{$i}){
+				img{
+					box-shadow: if($i == 3 or $i == 2 , 5px, -5px) if($i > 2 , 5px, -5px)   blue;
+				}
+			}
+		}		
+	}
+
+
+}
