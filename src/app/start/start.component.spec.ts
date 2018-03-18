@@ -4,6 +4,7 @@ import { StartComponent } from './start.component';
 import { By } from '@angular/platform-browser';
 
 import { CmpCandidatesComponent } from '../cmp-candidates/cmp-candidates.component';
+import { CmpCreditsComponent } from '../cmp-credits/cmp-credits.component';
 
 import { Component } from '@angular/core';
 
@@ -23,7 +24,7 @@ describe('StartComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StartComponent, CmpCandidatesStubComponent ],
+      declarations: [ StartComponent, CmpCandidatesStubComponent, CmpCreditsComponent ],
     })
     .compileComponents();
   }));
