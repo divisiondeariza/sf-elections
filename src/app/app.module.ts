@@ -12,12 +12,14 @@ import { SvCandidatesService } from './sv-candidates/sv-candidates.service';
 import { HttpClientModule }    from '@angular/common/http';
 
 import { AlertModule } from 'ngx-bootstrap/alert';
+import { CmpCreditsComponent } from './cmp-credits/cmp-credits.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     StartComponent,
-    CmpCandidatesComponent
+    CmpCandidatesComponent,
+    CmpCreditsComponent
   ],
   imports: [
     BrowserModule,
