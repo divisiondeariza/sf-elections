@@ -1,7 +1,8 @@
 <h1>SISMÓGRAFO ELECTORAL</h1>
 <app-cmp-credits></app-cmp-credits>
 <h2 class="instructions">Seleccione 4 candidatos</h2>
-<app-cmp-candidates [(selected)] = "candidates" [limit] = 4 ></app-cmp-candidates>
+<!-- <app-cmp-category-choose></app-cmp-category-choose> -->
+<app-cmp-candidates [(selected)] = "candidates" [limit] = 4 [isPrincipal] = "!areCandidatesChoosen"></app-cmp-candidates>
 <div class="start-btn-container">
-	<button class="start-btn">¡Empezar!</button>
+	<button class="start-btn" (click)="chooseCandidates()">¡Empezar!</button>
 </div>

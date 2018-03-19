@@ -4,6 +4,7 @@ import { StartComponent } from './start.component';
 import { By } from '@angular/platform-browser';
 
 import { CmpCandidatesComponent } from '../cmp-candidates/cmp-candidates.component';
+import { CmpCategoryChooseComponent } from '../cmp-category-choose/cmp-category-choose.component';
 import { CmpCreditsComponent } from '../cmp-credits/cmp-credits.component';
 
 import { Component } from '@angular/core';
@@ -15,7 +16,13 @@ import { Candidate } from '../candidate';
 class CmpCandidatesStubComponent {
   @Input() selected: String[];
   @Input() limit: Number;
+  @Input() isPrincipal: Boolean;
   @Output() selectedChange = new EventEmitter<String[]>();
+}
+
+@Component({selector: 'app-cmp-category-choose', template: ''})
+class CmpCategoryChooseStubComponent {
+
 }
 
 describe('StartComponent', () => {
@@ -24,7 +31,10 @@ describe('StartComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StartComponent, CmpCandidatesStubComponent, CmpCreditsComponent ],
+      declarations: [ StartComponent, 
+                      CmpCandidatesStubComponent, 
+                      CmpCategoryChooseStubComponent, 
+                      CmpCreditsComponent ],
     })
     .compileComponents();
   }));
@@ -60,6 +70,16 @@ describe('StartComponent', () => {
       expect(component.candidates).toEqual(updatedCandidates);
     });
 
+    it("should set isPrincipal attribute as false when start-btn clicked", () =>{
+      expect(candidatesEl.componentInstance.isPrincipal).toBeTruthy();
+    });
+
+    it("should set isPrincipal attribute as false when start-btn clicked", () =>{
+      const button = fixture.nativeElement.querySelectorAll(".start-btn")[0];
+      button.click();
+      fixture.detectChanges();
+      expect(candidatesEl.componentInstance.isPrincipal).toBeFalsy();
+    });
 
   });
 

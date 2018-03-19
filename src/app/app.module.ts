@@ -8,18 +8,22 @@ import { StartComponent } from './start/start.component';
 import { CmpCandidatesComponent } from './cmp-candidates/cmp-candidates.component';
 
 import { SvCandidatesService } from './sv-candidates/sv-candidates.service';
+import { SvVizCategoriesService } from './sv-viz-categories/sv-viz-categories.service';
+
 
 import { HttpClientModule }    from '@angular/common/http';
 
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { CmpCreditsComponent } from './cmp-credits/cmp-credits.component';
+import { CmpCategoryChooseComponent } from './cmp-category-choose/cmp-category-choose.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     StartComponent,
     CmpCandidatesComponent,
-    CmpCreditsComponent
+    CmpCreditsComponent,
+    CmpCategoryChooseComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +32,8 @@ import { CmpCreditsComponent } from './cmp-credits/cmp-credits.component';
 
     AlertModule.forRoot()
   ],
-  providers: [SvCandidatesService],
+  providers: [SvCandidatesService,
+              SvVizCategoriesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

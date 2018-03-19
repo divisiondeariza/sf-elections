@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./start.component.scss']
 })
 export class StartComponent implements OnInit {
-
+  areCandidatesChoosen: Boolean = false;
   candidates: String[] = [];
 
   constructor() { }
@@ -15,4 +15,8 @@ export class StartComponent implements OnInit {
   ngOnInit() {
   }
 
+  chooseCandidates(){
+  	console.log("light");
+  	this.areCandidatesChoosen = true;
+  }
 }
