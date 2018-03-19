@@ -8,9 +8,10 @@ import { VizCategory } from '../viz-category';
   styleUrls: ['./cmp-category-choose.component.scss']
 })
 export class CmpCategoryChooseComponent implements OnInit {
-  private selected: String;
+  categoryGridClass:String = 'col-sm-12'
+  visibleCategories:VizCategory[]
   private categories:VizCategory[];
-  private visibleCategories:VizCategory[]
+
 
   constructor(private vizCategoriesService: SvVizCategoriesService) { }
 
@@ -28,6 +29,7 @@ export class CmpCategoryChooseComponent implements OnInit {
   select(id){
   	const selectedCategory = this.visibleCategories.filter(category => category.id == id)[0];
   	this.visibleCategories = selectedCategory.children;
+  	this.categoryGridClass = this.visibleCategories.length > 8?'col-sm-3':'col-sm-12';
   }
 
 }

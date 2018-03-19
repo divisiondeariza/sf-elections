@@ -21,10 +21,13 @@ describe('CmpCategoryChooseComponent', () => {
                         { id: 'one-a', name: 'VizCategory One a', children: []},
                         { id: 'one-b', name: 'VizCategory One b', children: []},
                         ] },
-                     { id: 'two', name: 'VizCategory Two', children: [
-                        { id: 'two-a', name: 'VizCategory Two a', children: []},
-                        { id: 'two-b', name: 'VizCategory Two b', children: []},
-                       ]}];
+                     { id: 'two', name: 'VizCategory Two', children: []}];
+
+    for(let letter of ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']){
+      vizCategories[1].children
+        .push({ id: 'one-' + letter, name: 'VizCategory One ' + letter, children: []})
+    }                  
+
     const vizCategoriesService = jasmine.createSpyObj('SvVizCategoriesService', ['getVizCategories'])
     getVizCategoriesSpy = vizCategoriesService.getVizCategories.and.returnValue(of(vizCategories));
     TestBed.configureTestingModule({
@@ -43,6 +46,9 @@ describe('CmpCategoryChooseComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+
+
   describe('root elements', () =>{
       it('should show root categories by default', () => {
        const categoriesInDom = fixture.nativeElement.querySelectorAll(".category");
@@ -61,7 +67,20 @@ describe('CmpCategoryChooseComponent', () => {
   });
 
   describe('child elements', () =>{
-    
+
+  })
+
+  describe('Category grid class', ()=>{
+    it("Should be col-sm-12 when there are few categories", ()=>{
+      expect(component.categoryGridClass).toEqual('col-sm-12')
+    });
+
+    it("Should be col-sm-3 when there are more than 8 categories", ()=>{
+      const categoriesInDom = fixture.nativeElement.querySelectorAll(".category");
+      categoriesInDom[1].click(); // Now it has 10
+      fixture.detectChanges();
+      expect(component.categoryGridClass).toEqual('col-sm-3')
+    });
   })
 
 

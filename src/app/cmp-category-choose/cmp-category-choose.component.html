@@ -1,3 +1,7 @@
-<div *ngFor="let category of visibleCategories" class="category" (click) = "select(category.id)">
-	<div class="candidate-name">{{category.name}}</div>
+<div class="row">
+	<div *ngFor="let category of visibleCategories" [ngClass] = "categoryGridClass">
+		<button class="category" (click) = "select(category.id)">
+			{{category.name}}
+		</button>
+	<div>
 </div>

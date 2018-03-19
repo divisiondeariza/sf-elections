@@ -49,6 +49,14 @@ describe('StartComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should hide start-btn after clicked', ()=>{
+      const button = fixture.nativeElement.querySelectorAll(".start-btn")[0];
+      console.log(button);
+      button.click();
+      fixture.detectChanges();   
+      expect(fixture.nativeElement.querySelectorAll(".start-btn").length).toEqual(0);
+  })
+
   describe('set candidates component correctly', () => {
     let candidatesEl: DebugElement;
 
@@ -82,5 +90,22 @@ describe('StartComponent', () => {
     });
 
   });
+
+  describe('Choose Component', () =>{
+
+    it('Should not show at startup', ()=>{
+      expect(fixture.nativeElement.querySelectorAll("app-cmp-category-choose").length).toBe(0);
+    });
+
+    describe('after it appears', ()=>{
+        it("Should show when start-btn clicked", () =>{
+        const button = fixture.nativeElement.querySelectorAll(".start-btn")[0];
+        button.click();
+        fixture.detectChanges(); 
+        expect(fixture.nativeElement.querySelectorAll("app-cmp-category-choose").length).toBe(1); 
+      })
+    })
+
+  })
 
 });

@@ -16,7 +16,6 @@ export class StartComponent implements OnInit {
   }
 
   chooseCandidates(){
-  	console.log("light");
   	this.areCandidatesChoosen = true;
   }
 }
