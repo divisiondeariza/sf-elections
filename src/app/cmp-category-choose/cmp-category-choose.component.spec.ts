@@ -49,7 +49,7 @@ describe('CmpCategoryChooseComponent', () => {
 
 
 
-  describe('root elements', () =>{
+  describe('click root elements', () =>{
       it('should show root categories by default', () => {
        const categoriesInDom = fixture.nativeElement.querySelectorAll(".category");
        expect(categoriesInDom[0].textContent).toContain('VizCategory One');
@@ -66,7 +66,18 @@ describe('CmpCategoryChooseComponent', () => {
       })
   });
 
-  describe('child elements', () =>{
+  describe('emit choosen category', () =>{
+    it('should emit category id when the category has no more children', () =>{
+       let chosenCategory: String;
+       component.chosenCategoryIdChange.subscribe((value) => chosenCategory = value)
+       const categoriesInDom = fixture.nativeElement.querySelectorAll(".category");
+       categoriesInDom[0].click();
+       fixture.detectChanges(); 
+       const childCategoriesInDom = fixture.nativeElement.querySelectorAll(".category");
+       childCategoriesInDom[0].click();
+       fixture.detectChanges();     
+       expect(chosenCategory).toEqual('one-a') 
+    })
 
   })
 

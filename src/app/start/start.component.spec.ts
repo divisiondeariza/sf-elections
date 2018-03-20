@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Input, Output, EventEmitter, DebugElement } from '@angular/core';
 import { StartComponent } from './start.component';
 import { By } from '@angular/platform-browser';
-
+import { Router } from '@angular/router';
 import { CmpCandidatesComponent } from '../cmp-candidates/cmp-candidates.component';
 import { CmpCategoryChooseComponent } from '../cmp-category-choose/cmp-category-choose.component';
 import { CmpCreditsComponent } from '../cmp-credits/cmp-credits.component';
@@ -22,12 +22,13 @@ class CmpCandidatesStubComponent {
 
 @Component({selector: 'app-cmp-category-choose', template: ''})
 class CmpCategoryChooseStubComponent {
-
+  @Output() chosenCategoryIdChange = new EventEmitter<String>();
 }
 
 describe('StartComponent', () => {
   let component: StartComponent;
   let fixture: ComponentFixture<StartComponent>;
+  const routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl']);
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -35,6 +36,9 @@ describe('StartComponent', () => {
                       CmpCandidatesStubComponent, 
                       CmpCategoryChooseStubComponent, 
                       CmpCreditsComponent ],
+      providers: [
+        { provide: Router, useValue: routerSpy }
+      ]
     })
     .compileComponents();
   }));
@@ -51,7 +55,6 @@ describe('StartComponent', () => {
 
   it('should hide start-btn after clicked', ()=>{
       const button = fixture.nativeElement.querySelectorAll(".start-btn")[0];
-      console.log(button);
       button.click();
       fixture.detectChanges();   
       expect(fixture.nativeElement.querySelectorAll(".start-btn").length).toEqual(0);
@@ -73,7 +76,7 @@ describe('StartComponent', () => {
     });
 
     it("should update candidates array when candidates component updates", ()=>{
-      const updatedCandidates:any =  [{ id: 'one', name: 'Candidate One' }]
+      const updatedCandidates:any =  [{ id: 'one', name: 'Candidate One' }] //WTF the any, should be candidate[]!
       candidatesEl.componentInstance.selectedChange.emit(updatedCandidates);
       expect(component.candidates).toEqual(updatedCandidates);
     });
@@ -98,14 +101,28 @@ describe('StartComponent', () => {
     });
 
     describe('after it appears', ()=>{
+        let chooseVizEl: DebugElement;
+        let router: Router;
+
+        beforeEach(()=>{
+          const button = fixture.nativeElement.querySelectorAll(".start-btn")[0];
+          button.click();
+          fixture.detectChanges(); 
+          chooseVizEl = fixture.debugElement.query(By.css('app-cmp-category-choose'));
+          router = fixture.debugElement.injector.get(Router);
+
+        });
+
         it("Should show when start-btn clicked", () =>{
-        const button = fixture.nativeElement.querySelectorAll(".start-btn")[0];
-        button.click();
-        fixture.detectChanges(); 
-        expect(fixture.nativeElement.querySelectorAll("app-cmp-category-choose").length).toBe(1); 
-      })
+          expect(fixture.nativeElement.querySelectorAll("app-cmp-category-choose").length).toBe(1); 
+        });
+
+        it('Should redirect to viz when category id is emited', () =>{
+          chooseVizEl.componentInstance.chosenCategoryIdChange.emit('some category');
+          const spy = router.navigateByUrl as jasmine.Spy;
+          const navArgs = spy.calls.first().args[0];
+          expect(navArgs).toBe('/viz')
+        })
     })
-
   })
-
 });
