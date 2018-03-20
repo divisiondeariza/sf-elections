@@ -4,6 +4,8 @@ import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { ActivatedRoute, convertToParamMap, ParamMap, Params } from '@angular/router';
 import { VizComponent } from './viz.component';
 import { By } from '@angular/platform-browser';
+import { CmpCreditsComponent } from '../cmp-credits/cmp-credits.component';
+
 
 
 @Component({selector: 'app-cmp-graph', template: ''})
@@ -61,7 +63,7 @@ describe('VizComponent', () => {
     activatedRoute.setParamMap({ category: 'some-category' });
     activatedRoute.setQueryParams({ 'candidates': ['c1', 'c2', 'c3', 'c4'] })
     TestBed.configureTestingModule({
-      declarations: [ VizComponent, CmpGraphComponent, CmpCandidatesStubComponent ],
+      declarations: [ VizComponent, CmpGraphComponent, CmpCandidatesStubComponent, CmpCreditsComponent ],
       providers: [{ provide: ActivatedRoute, useValue: activatedRoute }]
     })
     .compileComponents();
