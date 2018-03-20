@@ -8,7 +8,7 @@ import { VizComponent } from './viz/viz.component';
 const routes: Routes = [
 	{ path: '', redirectTo: '/start', pathMatch: 'full' },
 	{ path: 'start', component: StartComponent },
-	{ path: 'viz', component: VizComponent },
+	{ path: 'viz/:category', component: VizComponent },
 ];
 
 @NgModule({
