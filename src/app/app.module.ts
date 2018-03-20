@@ -12,10 +12,16 @@ import { SvVizCategoriesService } from './sv-viz-categories/sv-viz-categories.se
 
 
 import { HttpClientModule }    from '@angular/common/http';
-
+import { NvD3Module } from 'ng2-nvd3';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { CmpCreditsComponent } from './cmp-credits/cmp-credits.component';
 import { CmpCategoryChooseComponent } from './cmp-category-choose/cmp-category-choose.component';
+import { VizComponent } from './viz/viz.component';
+
+
+// d3 and nvd3 should be included somewhere
+import 'd3';
+import 'nvd3';
 
 @NgModule({
   declarations: [
@@ -23,13 +29,14 @@ import { CmpCategoryChooseComponent } from './cmp-category-choose/cmp-category-c
     StartComponent,
     CmpCandidatesComponent,
     CmpCreditsComponent,
-    CmpCategoryChooseComponent
+    CmpCategoryChooseComponent,
+    VizComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-
+    NvD3Module,
     AlertModule.forRoot()
   ],
   providers: [SvCandidatesService,
