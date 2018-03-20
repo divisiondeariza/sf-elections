@@ -44,11 +44,13 @@ describe('SvTimeSeriesService', () => {
 	  const expectedTimeSeries: TimeSerie[] =[
 	  	{
 	  		'dates': ['2018-01-01', '2018-01-02', '2018-01-03'],
-	  		'values': ['0', '1', '2']
+	  		'values': ['0', '1', '2'],
+	  		'candidateId': 'candidate1'
 	  	},
 	  	{
 	  		'dates': ['2018-01-01', '2018-01-02', '2018-01-03'],
-	  		'values': ['3', '4', '5']
+	  		'values': ['3', '4', '5'],
+	  		'candidateId': 'candidate2'	  		
 	  	}
 
 	  ]
