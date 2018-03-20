@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -23,6 +22,8 @@ import { VizComponent } from './viz/viz.component';
 // d3 and nvd3 should be included somewhere
 import 'd3';
 import 'nvd3';
+import 'moment'
+
 import { CmpGraphComponent } from './cmp-graph/cmp-graph.component';
 
 @NgModule({

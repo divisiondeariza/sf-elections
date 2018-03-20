@@ -3,7 +3,9 @@ import { SvLineChartSeriesService } from '../sv-line-chart-series/sv-line-chart-
 import { LineChartSerie } from '../line-chart-serie';
 import { NvD3Module } from 'ng2-nvd3';
 import 'd3';
+import * as moment from 'moment';
 declare let d3: any;
+
 
 
 @Component({
@@ -20,6 +22,8 @@ export class CmpGraphComponent implements OnInit {
   constructor(private lineChartSeriesService: SvLineChartSeriesService) { }
 
   ngOnInit() {
+    moment.locale("es");
+
   	this.lineChartSeriesService.getLineChartSeries(this.candidatesIds, this.category)
   		.subscribe(data => this.data =  data);
 
@@ -30,7 +34,7 @@ export class CmpGraphComponent implements OnInit {
         useInteractiveGuideline: true,
         xAxis: {
           axisLabel: 'fecha',
-          tickFormat: d => d3.time.format('%Y-%m-%d')(new Date(d)),
+          tickFormat: d => moment(d).format("D [de] MMMM [de] YYYY"),
         },
         yAxis: {
           tickFormat: d => d3.format('.02f')(d),

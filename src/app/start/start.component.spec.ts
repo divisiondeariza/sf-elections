@@ -1,8 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Input, Output, EventEmitter, DebugElement } from '@angular/core';
+import { Router } from '@angular/router';
 import { StartComponent } from './start.component';
 import { By } from '@angular/platform-browser';
-import { Router } from '@angular/router';
 import { CmpCandidatesComponent } from '../cmp-candidates/cmp-candidates.component';
 import { CmpCategoryChooseComponent } from '../cmp-category-choose/cmp-category-choose.component';
 import { CmpCreditsComponent } from '../cmp-credits/cmp-credits.component';
@@ -76,7 +76,7 @@ describe('StartComponent', () => {
     });
 
     it("should update candidates array when candidates component updates", ()=>{
-      const updatedCandidates:any =  [{ id: 'one', name: 'Candidate One' }] //WTF the any, should be candidate[]!
+      const updatedCandidates:String[] =  ['one'];
       candidatesEl.componentInstance.selectedChange.emit(updatedCandidates);
       expect(component.candidates).toEqual(updatedCandidates);
     });
@@ -121,7 +121,7 @@ describe('StartComponent', () => {
 
         it('Should redirect to viz when category id is emited', () =>{
           const spy = router.navigate as jasmine.Spy; 
-          const updatedCandidates:any =  [{ id: 'one', name: 'Candidate One' }] //WTF the any, should be candidate[]!
+          const updatedCandidates:any =  ['one', 'two'] //WTF the any, should be candidate[]!
           candidatesEl.componentInstance.selectedChange.emit(updatedCandidates);
           chooseVizEl.componentInstance.chosenCategoryIdChange.emit('some-category');
           const navArgs = spy.calls.first().args[0];

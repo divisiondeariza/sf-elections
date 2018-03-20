@@ -74,7 +74,7 @@ describe('CmpGraphComponent', () => {
 
     it('Should set tickFormats correctly', ()=>{
       expect(d3.format('.02f')(Math.PI)).toEqual(chart.yAxis.tickFormat(Math.PI));
-      expect(d3.time.format('%Y-%m-%d')(new Date('1989-11-22'))).toEqual(chart.xAxis.tickFormat('1989-11-22'));
+      expect("22 de noviembre de 1989").toEqual(chart.xAxis.tickFormat('1989-11-22'));
 
     })
   });
