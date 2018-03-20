@@ -10,10 +10,6 @@ declare let d3: any;
 })
 export class VizComponent implements OnInit {
 
-  options;
-  data;
-  chartType;
-
   public candidatesIds: String[];
   public category: String;
 
@@ -27,8 +23,5 @@ export class VizComponent implements OnInit {
     this.route.paramMap.subscribe(pmap => {
       this.category = pmap.get('category')
     });
-
-    
   }
-
 }

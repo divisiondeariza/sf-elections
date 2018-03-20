@@ -1,4 +1,5 @@
 <div>
   <app-cmp-graph [candidatesIds]="candidatesIds" [category]="category"></app-cmp-graph>
+  <app-cmp-candidates [(selected)] = "candidatesIds" [limit] = 4 [isPrincipal] = "false"></app-cmp-candidates>
 </div>
 
