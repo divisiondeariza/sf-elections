@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Input, Output, Component } from '@angular/core';
+import { Input, Output, Component, EventEmitter } from '@angular/core';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { ActivatedRoute, convertToParamMap, ParamMap, Params } from '@angular/router';
 import { VizComponent } from './viz.component';
@@ -81,6 +81,12 @@ describe('VizComponent', () => {
     cmpGraphComponent = fixture.debugElement.query(By.css('app-cmp-graph'));
     expect(cmpGraphComponent.componentInstance.candidatesIds).toEqual(['c1', 'c2', 'c3', 'c4']);
     expect(cmpGraphComponent.componentInstance.category).toEqual('some-category');
+  });
+
+  it('Should set candidates component correctly', () =>{
+    const candidatesEl = fixture.debugElement.query(By.css('app-cmp-candidates'));
+    expect(candidatesEl.componentInstance.selected).toEqual(['c1', 'c2', 'c3', 'c4']);
+    expect(candidatesEl.componentInstance.isPrincipal).toBeFalsy();
   });
 
 });
