@@ -1,42 +1,52 @@
 [
   {
     "name": "Piedad Córdoba",
-    "id": "cordoba"
+    "id": "cordoba",
+    "color": "#ec2176"
   },
   {
     "name": "Humberto De La Calle",
-    "id": "delacalle"
+    "id": "delacalle",
+    "color": "#fedd14"
   },
   {
     "name": "Iván Duque",
-    "id": "duque"
+    "id": "duque",
+    "color": "#2cc3ff"
   },
   {
     "name": "Rodrigo Londoño (Timochenko)",
-    "id": "londono"
+    "id": "londono",
+    "color": "#642b8f"
   },
   {
     "name": "Sergio Fajardo",
-    "id": "fajardo"
+    "id": "fajardo",
+    "color": "#29b574"
   },
   {
     "name": "Alejandro Ordoñez",
-    "id": "ordonez"
+    "id": "ordonez",
+    "color": "#076ab5"
   },
   {
     "name": "Gustavo Petro",
-    "id": "petro"
+    "id": "petro",
+    "color": "#fedd14"
   },
   {
     "name": "Juan Carlos Pinzón",
-    "id": "pinzon"
+    "id": "pinzon",
+    "color": "#5e57a5"
   },
   {
     "name": "Martha Lucía Ramirez",
-    "id": "ramirez"
+    "id": "ramirez",
+    "color": "#2cc3ff"
   },
   {
     "name": "Germán Vargas Lleras",
-    "id": "vargas"
+    "id": "vargas",
+    "color": "#30efce"
   }
 ]
