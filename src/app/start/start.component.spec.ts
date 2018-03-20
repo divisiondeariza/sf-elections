@@ -28,7 +28,7 @@ class CmpCategoryChooseStubComponent {
 describe('StartComponent', () => {
   let component: StartComponent;
   let fixture: ComponentFixture<StartComponent>;
-  const routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl']);
+  const routerSpy = jasmine.createSpyObj('Router', ['navigate']);
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -102,6 +102,7 @@ describe('StartComponent', () => {
 
     describe('after it appears', ()=>{
         let chooseVizEl: DebugElement;
+        let candidatesEl: DebugElement;
         let router: Router;
 
         beforeEach(()=>{
@@ -109,6 +110,7 @@ describe('StartComponent', () => {
           button.click();
           fixture.detectChanges(); 
           chooseVizEl = fixture.debugElement.query(By.css('app-cmp-category-choose'));
+          candidatesEl = fixture.debugElement.query(By.css('app-cmp-candidates'));
           router = fixture.debugElement.injector.get(Router);
 
         });
@@ -117,12 +119,15 @@ describe('StartComponent', () => {
           expect(fixture.nativeElement.querySelectorAll("app-cmp-category-choose").length).toBe(1); 
         });
 
-        xit('Should redirect to viz when category id is emited', () =>{
-          chooseVizEl.componentInstance.chosenCategoryIdChange.emit('some category');
-          const spy = router.navigateByUrl as jasmine.Spy;
+        it('Should redirect to viz when category id is emited', () =>{
+          const spy = router.navigate as jasmine.Spy; 
+          const updatedCandidates:any =  [{ id: 'one', name: 'Candidate One' }] //WTF the any, should be candidate[]!
+          candidatesEl.componentInstance.selectedChange.emit(updatedCandidates);
+          chooseVizEl.componentInstance.chosenCategoryIdChange.emit('some-category');
           const navArgs = spy.calls.first().args[0];
-          expect(navArgs).toBe('/viz')
+          expect(navArgs).toEqual(['/viz', 'some-category'], { queryParams: { candidates: component.candidates } })
         })
     })
   })
 });
+
