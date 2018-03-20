@@ -39,7 +39,7 @@
 			@for $i from 1 to 5 {
 				&:nth-child(4n + #{$i}){
 					img{
-						box-shadow: if($i == 3 or $i == 2 , 10px, -10px) if($i > 2 , 10px, -10px)   blue;
+						box-shadow: if($i == 3 or $i == 2 , 10px, -10px) if($i > 2 , 10px, -10px);
 					}
 				}
 			}		
@@ -61,22 +61,21 @@
 		}		
 
 		img{
-			// width: auto;
 			width: 70px;
 			margin: 5px;
-			border-top: 3px;
-			border-left: 3px;
-			border-right: 3px;
-			border-bottom: 0px;
-			border-style: solid;
-			border-color: rgba(0,0,0,0)
+			border-color: blue;
+			
 
 		}
 	}
 
 	.selected{
 		img{
-			border-color: blue;
+			border-top: 5px;
+			border-left: 5px;
+			border-right: 5px;
+			border-bottom: 0px;
+			border-style: solid;
 		}	
 	}
 

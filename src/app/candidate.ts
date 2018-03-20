@@ -1,4 +1,6 @@
 export class Candidate {
-  id: string;
-  name: string;
+  id: String;
+  name: String;
+  color: String
 }
+

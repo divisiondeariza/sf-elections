@@ -1,5 +1,5 @@
 export class TimeSerie {
 	dates: String[];
-	values: String[]
-	candidateId: String
+	values: String[];
+	candidateId: String;
 }

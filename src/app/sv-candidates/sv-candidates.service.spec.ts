@@ -29,7 +29,7 @@ describe('SvCandidatesService', () => {
   it('should return expected candidates (http called once)', inject([SvCandidatesService], 
   	(service: SvCandidatesService)  =>{
 	  const expectedCandidates: Candidate[] =
-	    [{ id: 'one', name: 'Candidate One' }, { id: 'two', name: 'Candidate Two' }];
+	    [{ id: 'one', name: 'Candidate One', color:"#fff"}, { id: 'two', name: 'Candidate Two', color:"#888" }];
 	  service.getCandidates()
 	  		.subscribe(candidates => expect(candidates).toEqual(expectedCandidates))
 
@@ -40,4 +40,8 @@ describe('SvCandidatesService', () => {
 
 
   }))
+
+
 });
+
+

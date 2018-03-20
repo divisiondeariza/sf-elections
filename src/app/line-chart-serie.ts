@@ -1,6 +1,7 @@
 export class LineChartSerie {
 	values:LineChartDatum[];
 	key:String;
+	color:String;
 }
 
 

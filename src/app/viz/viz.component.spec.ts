@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Input, Output, Component, EventEmitter } from '@angular/core';
+import { Input, Output, Component, EventEmitter, DebugElement } from '@angular/core';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { ActivatedRoute, convertToParamMap, ParamMap, Params } from '@angular/router';
 import { VizComponent } from './viz.component';
@@ -26,7 +26,7 @@ class ActivatedRouteStub {
   // Use a ReplaySubject to share previous values with subscribers
   // and pump new values into the `paramMap` observable
   private subjectParam = new ReplaySubject<ParamMap>();
-  private subjectQuery = new ReplaySubject<Any>();
+  private subjectQuery = new ReplaySubject<any>();
 
   constructor(initialParams?: Params) {
     this.setParamMap(initialParams);

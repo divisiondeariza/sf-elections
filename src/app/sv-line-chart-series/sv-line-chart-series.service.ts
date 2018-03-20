@@ -33,7 +33,8 @@ export class SvLineChartSeriesService {
   private remapTimeSerie(timeSerie, candidates):LineChartSerie{
   	return{
   		values: timeSerie.values.map((value, index) => this.mapSingleValue(value, index, timeSerie)),
-  		key: candidates.filter(candidate => candidate.id == timeSerie.candidateId)[0].name
+  		key: candidates.filter(candidate => candidate.id == timeSerie.candidateId)[0].name,
+      color: candidates.filter(candidate => candidate.id == timeSerie.candidateId)[0].color,
   	}
 
   }

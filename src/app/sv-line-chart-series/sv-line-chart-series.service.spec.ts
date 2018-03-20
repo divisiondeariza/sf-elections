@@ -17,17 +17,18 @@ describe('SvLineChartSeriesService', () => {
 
 
   beforeEach(() => {
-  	candidates = [{ id: 'candidate1', name: 'Candidate One' }, { id: 'candidate2', name: 'Candidate Two' }];
+  	candidates = [{ id: 'candidate1', name: 'Candidate One', color:"#fff"}, { id: 'candidate2', name: 'Candidate Two', color:"#888" }];
   	timeSeries = [
 	  	{
 	  		'dates': ['2018-01-01', '2018-01-02', '2018-01-03'],
 	  		'values': ['0', '1', '2'],
-	  		'candidateId': 'candidate1'
+	  		'candidateId': 'candidate1',
 	  	},
 	  	{
 	  		'dates': ['2018-01-01', '2018-01-02', '2018-01-03'],
 	  		'values': ['3', '4', '5'],
-	  		'candidateId': 'candidate2'	  		
+	  		'candidateId': 'candidate2',
+        'color': "#888" 	  		
 	  	}
 
 	  ]
@@ -58,13 +59,15 @@ describe('SvLineChartSeriesService', () => {
     		{'y': 1, 'x': new Date('2018-01-02')},
     		{'y': 2, 'x': new Date('2018-01-03')},
     		],
-    	 'key': 'Candidate One'},
+    	 'key': 'Candidate One',
+        'color': "#fff"},
     	{'values': [ 
     		{'y': 3, 'x': new Date('2018-01-01')},
     		{'y': 4, 'x': new Date('2018-01-02')},
     		{'y': 5, 'x': new Date('2018-01-03')},
     		],
-    	 'key': 'Candidate Two'},
+    	 'key': 'Candidate Two',
+        'color': "#888"},
     ]
 
   	service.getLineChartSeries(['candidate1', 'candidate2'], 'category')
