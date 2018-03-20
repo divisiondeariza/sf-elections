@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router, Params} from "@angular/router";
-
+import { ActivatedRoute, Router, Params } from "@angular/router";
+import { SvLineChartSeriesService } from '../sv-line-chart-series/sv-line-chart-series.service';
 declare let d3: any;
 
 @Component({
@@ -10,16 +10,59 @@ declare let d3: any;
 })
 export class VizComponent implements OnInit {
 
-  constructor(private router: Router,
-              private route: ActivatedRoute){}
+  options;
+  data;
+  chartType;
+
+
+  constructor(private route: ActivatedRoute,
+              private lineChartSeries: SvLineChartSeriesService){}
 
   ngOnInit(){
+
+
+    this.options = {
+      chart: {
+        type: 'lineChart',
+        height: 450,
+        margin : {
+          top: 20,
+          right: 20,
+          bottom: 40,
+          left: 55
+        },
+        x: function(d){ return d.x; },
+        y: function(d){ return d.y; },
+        useInteractiveGuideline: true,
+        xAxis: {
+          axisLabel: 'Time (ms)',
+          tickFormat: function(d){
+            return d3.time.format('%Y-%m')(new Date(d));
+          },
+        },
+        yAxis: {
+          axisLabel: 'Voltage (v)',
+          tickFormat: function(d){
+            return d3.format('.02f')(d);
+          },
+          axisLabelDistance: -10
+        }
+      }
+    };
+
+
     this.route.queryParams
         .subscribe((queryParams: Params) =>{
           console.log(queryParams['candidates'])
+          this.route.paramMap.subscribe(pmap => {
+            console.log(pmap.get('category'))
+            this.lineChartSeries.getLineChartSeries(queryParams['candidates'], pmap.get('category'))
+                .subscribe(data => this.data = data)
+
+          });
         })
 
-    this.route.paramMap.subscribe(pmap => {console.log(pmap.get('category'))});
+    
   }
 
  //  options;
@@ -27,31 +70,7 @@ export class VizComponent implements OnInit {
  //  chartType;
  // ngOnInit(){
     
- //    this.options = {
- //      chart: {
- //        type: 'lineChart',
- //        height: 450,
- //        margin : {
- //          top: 20,
- //          right: 20,
- //          bottom: 40,
- //          left: 55
- //        },
- //        x: function(d){ return d.x; },
- //        y: function(d){ return d.y; },
- //        useInteractiveGuideline: true,
- //        xAxis: {
- //          axisLabel: 'Time (ms)'
- //        },
- //        yAxis: {
- //          axisLabel: 'Voltage (v)',
- //          tickFormat: function(d){
- //            return d3.format('.02f')(d);
- //          },
- //          axisLabelDistance: -10
- //        }
- //      }
- //    };
+
   
  //    this.data = this.sinAndCos();
  //  }

@@ -9,7 +9,8 @@ import { CmpCandidatesComponent } from './cmp-candidates/cmp-candidates.componen
 
 import { SvCandidatesService } from './sv-candidates/sv-candidates.service';
 import { SvVizCategoriesService } from './sv-viz-categories/sv-viz-categories.service';
-
+import { SvTimeSeriesService } from './sv-time-series/sv-time-series.service';
+import { SvLineChartSeriesService } from './sv-line-chart-series/sv-line-chart-series.service';
 
 import { HttpClientModule }    from '@angular/common/http';
 import { NvD3Module } from 'ng2-nvd3';
@@ -30,7 +31,7 @@ import 'nvd3';
     CmpCandidatesComponent,
     CmpCreditsComponent,
     CmpCategoryChooseComponent,
-    VizComponent
+    VizComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,7 +41,9 @@ import 'nvd3';
     AlertModule.forRoot()
   ],
   providers: [SvCandidatesService,
-              SvVizCategoriesService],
+              SvVizCategoriesService,
+              SvTimeSeriesService,
+              SvLineChartSeriesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

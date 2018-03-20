@@ -5,6 +5,6 @@ export class LineChartSerie {
 
 
 class LineChartDatum{
-	x:Number;
-	y:Date;
+	y:Number;
+	x:Date;
 }

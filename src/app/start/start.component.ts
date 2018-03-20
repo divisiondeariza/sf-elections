@@ -23,6 +23,7 @@ export class StartComponent implements OnInit {
   openViz(category:String){
     let url = `/viz`;
     // let url = `/heroes/${hero.id}`;
-    this.router.navigateByUrl(url);
+    // this.router.navigateByUrl(url);
+    this.router.navigate(['/viz', category], { queryParams: { candidates: this.candidates } });
   }
 }

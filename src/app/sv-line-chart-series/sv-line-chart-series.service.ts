@@ -40,8 +40,8 @@ export class SvLineChartSeriesService {
 
   private mapSingleValue(value, index, timeSerie){
   	return {
-  		'x':parseInt(value), 
-  		'y':new Date(timeSerie.dates[index])
+  		'y':parseInt(value), 
+  		'x':new Date(timeSerie.dates[index])
   	}
   }
 

@@ -54,15 +54,15 @@ describe('SvLineChartSeriesService', () => {
   	inject([SvLineChartSeriesService], (service: SvLineChartSeriesService) => {
     const expectedSeries:LineChartSerie[] = [
     	{'values': [ 
-    		{'x': 0, 'y': new Date('2018-01-01')},
-    		{'x': 1, 'y': new Date('2018-01-02')},
-    		{'x': 2, 'y': new Date('2018-01-03')},
+    		{'y': 0, 'x': new Date('2018-01-01')},
+    		{'y': 1, 'x': new Date('2018-01-02')},
+    		{'y': 2, 'x': new Date('2018-01-03')},
     		],
     	 'key': 'Candidate One'},
     	{'values': [ 
-    		{'x': 3, 'y': new Date('2018-01-01')},
-    		{'x': 4, 'y': new Date('2018-01-02')},
-    		{'x': 5, 'y': new Date('2018-01-03')},
+    		{'y': 3, 'x': new Date('2018-01-01')},
+    		{'y': 4, 'x': new Date('2018-01-02')},
+    		{'y': 5, 'x': new Date('2018-01-03')},
     		],
     	 'key': 'Candidate Two'},
     ]

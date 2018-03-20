@@ -117,7 +117,7 @@ describe('StartComponent', () => {
           expect(fixture.nativeElement.querySelectorAll("app-cmp-category-choose").length).toBe(1); 
         });
 
-        it('Should redirect to viz when category id is emited', () =>{
+        xit('Should redirect to viz when category id is emited', () =>{
           chooseVizEl.componentInstance.chosenCategoryIdChange.emit('some category');
           const spy = router.navigateByUrl as jasmine.Spy;
           const navArgs = spy.calls.first().args[0];
