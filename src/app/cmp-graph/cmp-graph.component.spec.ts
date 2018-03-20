@@ -12,6 +12,7 @@ class Nvd3StubComponent{
   @Input() options:any
 }
 
+declare let d3: any;
 
 
 describe('CmpGraphComponent', () => {
@@ -55,5 +56,25 @@ describe('CmpGraphComponent', () => {
     const nvd3El = fixture.debugElement.query(By.css('nvd3'));
     expect(nvd3El.componentInstance.data).toEqual(lineChartSeries)
 
-  })
+  });
+
+  describe('test options set corectly', ()=>{
+
+    let chart:any;
+    beforeEach(()=>{
+      chart = fixture.debugElement.query(By.css('nvd3')).componentInstance.options.chart
+    });
+
+    it('Should basic data', () =>{
+      expect(chart.height).toEqual(450);
+      expect(chart.type).toEqual('lineChart');
+      expect(chart.useInteractiveGuideline).toBeTruthy();
+    });
+
+    it('Should set tickFormats correctly', ()=>{
+      expect(d3.format('.02f')(Math.PI)).toEqual(chart.yAxis.tickFormat(Math.PI));
+      expect(d3.time.format('%Y-%m')(new Date('1989-11-22'))).toEqual(chart.xAxis.tickFormat('1989-11-22'));
+
+    })
+  });
 });
