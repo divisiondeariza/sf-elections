@@ -42,11 +42,16 @@
   {
     "name": "Martha Lucía Ramirez",
     "id": "ramirez",
-    "color": "#2cc3ff"
+    "color": "#f58807"
   },
   {
     "name": "Germán Vargas Lleras",
     "id": "vargas",
     "color": "#30efce"
+  },
+  {
+    "name": "Viviane Morales Hoyos",
+    "id": "morales",
+    "color": "#f26170"
   }
 ]
