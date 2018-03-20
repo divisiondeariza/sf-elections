@@ -14,8 +14,8 @@ export class VizComponent implements OnInit {
   data;
   chartType;
 
-  private candidatesIds: Strings[];
-  private category: String;
+  public candidatesIds: String[];
+  public category: String;
 
   constructor(private route: ActivatedRoute){}
 

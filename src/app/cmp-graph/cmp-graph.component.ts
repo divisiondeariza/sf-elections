@@ -15,8 +15,8 @@ export class CmpGraphComponent implements OnInit {
 
   @Input() candidatesIds: String[];
   @Input() category: String;
-  private data: LineChartSerie[];
-  private options: any;
+  public data: LineChartSerie[];
+  public options: any;
   constructor(private lineChartSeriesService: SvLineChartSeriesService) { }
 
   ngOnInit() {
@@ -29,11 +29,10 @@ export class CmpGraphComponent implements OnInit {
         height: 450,
         useInteractiveGuideline: true,
         xAxis: {
-          // axisLabel: 'Time (ms)',
-          tickFormat: d => d3.time.format('%Y-%m')(new Date(d)),
+          axisLabel: 'fecha',
+          tickFormat: d => d3.time.format('%Y-%m-%d')(new Date(d)),
         },
         yAxis: {
-          // axisLabel: 'Voltage (v)',
           tickFormat: d => d3.format('.02f')(d),
         }
       }

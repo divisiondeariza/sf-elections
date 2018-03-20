@@ -69,11 +69,12 @@ describe('CmpGraphComponent', () => {
       expect(chart.height).toEqual(450);
       expect(chart.type).toEqual('lineChart');
       expect(chart.useInteractiveGuideline).toBeTruthy();
+      expect(chart.xAxis.axisLabel).toEqual("fecha");
     });
 
     it('Should set tickFormats correctly', ()=>{
       expect(d3.format('.02f')(Math.PI)).toEqual(chart.yAxis.tickFormat(Math.PI));
-      expect(d3.time.format('%Y-%m')(new Date('1989-11-22'))).toEqual(chart.xAxis.tickFormat('1989-11-22'));
+      expect(d3.time.format('%Y-%m-%d')(new Date('1989-11-22'))).toEqual(chart.xAxis.tickFormat('1989-11-22'));
 
     })
   });
