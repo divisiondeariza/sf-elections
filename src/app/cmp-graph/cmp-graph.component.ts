@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, DoCheck } from '@angular/core';
 import { SvLineChartSeriesService } from '../sv-line-chart-series/sv-line-chart-series.service';
 import { LineChartSerie } from '../line-chart-serie';
 import { NvD3Module } from 'ng2-nvd3';
@@ -41,6 +41,11 @@ export class CmpGraphComponent implements OnInit {
         }
       }
     }
+  }
+
+  ngDoCheck(){
+    this.lineChartSeriesService.getLineChartSeries(this.candidatesIds, this.category)
+      .subscribe(data => this.data =  data);
   }
 
 }

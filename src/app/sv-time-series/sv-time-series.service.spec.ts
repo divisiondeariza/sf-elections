@@ -55,7 +55,7 @@ describe('SvTimeSeriesService', () => {
 
 	  ]
 	 
-	  service.getTimeSeries(['candidate1', 'candidate2'], 'category')
+	  service.getTimeSeries('category')
 	  		.subscribe(candidates => expect(candidates).toEqual(expectedTimeSeries))
 
 	  const req = httpTestingController.expectOne("assets/data/time-series.json");

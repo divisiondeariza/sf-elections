@@ -15,19 +15,23 @@ class Nvd3StubComponent{
 declare let d3: any;
 
 
-describe('CmpGraphComponent', () => {
+xdescribe('CmpGraphComponent', () => {
   let component: CmpGraphComponent;
   let fixture: ComponentFixture<CmpGraphComponent>;
   let lineChartSeries: LineChartSerie[];
   let getLineChartSeriesSpy: jasmine.Spy;
+  let lineChartSeriesService: any;
 
   beforeEach(async(() => {
     lineChartSeries = [
       {'values': [ 
-        {'y': 0, 'x': new Date('2018-01-01')},],
-       'key': 'Candidate One'},
+        {'y': 0, 'x': new Date('2018-01-01')}
+        ],
+       'key': 'Candidate One',
+       'color': '#888'},
+
     ]
-    const lineChartSeriesService = jasmine.createSpyObj('SvLineChartSeriesService', ['getLineChartSeries']);
+    lineChartSeriesService = jasmine.createSpyObj('SvLineChartSeriesService', ['getLineChartSeries']);
     getLineChartSeriesSpy = lineChartSeriesService.getLineChartSeries.and.returnValue(of(lineChartSeries));
 
     TestBed.configureTestingModule({
@@ -53,6 +57,27 @@ describe('CmpGraphComponent', () => {
   it('should get LineChartSeries and pass the data to the nvd3 component', () =>{
     expect(getLineChartSeriesSpy).toHaveBeenCalledWith(component.candidatesIds, component.category);
     expect(getLineChartSeriesSpy).toHaveBeenCalledTimes(1);
+    const nvd3El = fixture.debugElement.query(By.css('nvd3'));
+    expect(nvd3El.componentInstance.data).toEqual(lineChartSeries)
+
+  });
+
+  it('should refresh nvd3 when component.candidatesIds changes', () =>{
+    lineChartSeries = [
+      {'values': [ 
+        {'y': 0, 'x': new Date('2018-01-01')},],
+       'key': 'Candidate One',
+       'color': '#888'},
+      {'values': [ 
+        {'y': 0, 'x': new Date('2018-01-01')},],
+       'key': 'Candidate Two',
+       'color': '#888'},
+    ]
+    getLineChartSeriesSpy = lineChartSeriesService.getLineChartSeries.and.returnValue(of(lineChartSeries));
+    component.candidatesIds = ['candidate-one', 'candidate-two'];
+    fixture.detectChanges();
+    expect(getLineChartSeriesSpy).toHaveBeenCalledWith(component.candidatesIds, component.category);
+    expect(getLineChartSeriesSpy).toHaveBeenCalledTimes(2);
     const nvd3El = fixture.debugElement.query(By.css('nvd3'));
     expect(nvd3El.componentInstance.data).toEqual(lineChartSeries)
 

@@ -18,10 +18,10 @@ export class SvLineChartSeriesService {
   constructor(private candidatesService: SvCandidatesService,
   			  private timeSeriesService: SvTimeSeriesService ) { }
   
-  getLineChartSeries(candidates, category):Observable<LineChartSerie[]>{
+  getLineChartSeries(category):Observable<LineChartSerie[]>{
   	return Observable.forkJoin(
   		   this.candidatesService.getCandidates(),
-  		   this.timeSeriesService.getTimeSeries(candidates, category)	
+  		   this.timeSeriesService.getTimeSeries(category)	
   		).map( res => this.join(res[0], res[1]) )
 
   }
@@ -35,6 +35,7 @@ export class SvLineChartSeriesService {
   		values: timeSerie.values.map((value, index) => this.mapSingleValue(value, index, timeSerie)),
   		key: candidates.filter(candidate => candidate.id == timeSerie.candidateId)[0].name,
       color: candidates.filter(candidate => candidate.id == timeSerie.candidateId)[0].color,
+      candidateId: candidates.filter(candidate => candidate.id == timeSerie.candidateId)[0].id,
   	}
 
   }

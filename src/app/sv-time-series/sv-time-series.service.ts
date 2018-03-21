@@ -11,10 +11,10 @@ export class SvTimeSeriesService {
     private http: HttpClient,
   	) { }
 
-  getTimeSeries (candidatesIds, category): Observable<TimeSerie[]>{
+  getTimeSeries (category): Observable<TimeSerie[]>{
   	return this.http.get<TimeSerie[]>("assets/data/time-series.json")
   				.pipe(
-  					map(rawData => candidatesIds.map( candidateId => this.remapIntoTimeserie(rawData, category, candidateId)) )
+  					map(rawData => Object.keys(rawData[category]).map( candidateId => this.remapIntoTimeserie(rawData, category, candidateId)) )
   					)
   }
 
