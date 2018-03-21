@@ -19,13 +19,14 @@ export class CmpGraphComponent implements OnInit {
   @Input() category: String;
   public data: LineChartSerie[];
   public options: any;
+  private allSeries:LineChartSerie[];
   constructor(private lineChartSeriesService: SvLineChartSeriesService) { }
 
   ngOnInit() {
     moment.locale("es");
 
-  	this.lineChartSeriesService.getLineChartSeries(this.candidatesIds, this.category)
-  		.subscribe(data => this.data =  data);
+  	this.lineChartSeriesService.getLineChartSeries(this.category)
+  		.subscribe(series => this.allSeries =  series);
 
     this.options = {
       chart: {
@@ -44,8 +45,7 @@ export class CmpGraphComponent implements OnInit {
   }
 
   ngDoCheck(){
-    this.lineChartSeriesService.getLineChartSeries(this.candidatesIds, this.category)
-      .subscribe(data => this.data =  data);
+    this.data = this.lineChartSeriesService.filter(this.allSeries, this.candidatesIds)
   }
 
 }

@@ -15,24 +15,33 @@ class Nvd3StubComponent{
 declare let d3: any;
 
 
-xdescribe('CmpGraphComponent', () => {
+describe('CmpGraphComponent', () => {
   let component: CmpGraphComponent;
   let fixture: ComponentFixture<CmpGraphComponent>;
   let lineChartSeries: LineChartSerie[];
   let getLineChartSeriesSpy: jasmine.Spy;
+  let filterSpy: jasmine.Spy;
   let lineChartSeriesService: any;
 
   beforeEach(async(() => {
     lineChartSeries = [
-      {'values': [ 
-        {'y': 0, 'x': new Date('2018-01-01')}
-        ],
+      {'values': [ ],
        'key': 'Candidate One',
-       'color': '#888'},
+       'color': '#444',
+       'candidateId': 'candidate1'},
+      {'values': [ ],
+       'key': 'Candidate Two',
+       'color': '#888',
+       'candidateId': 'candidate2'},
+      {'values': [ ],
+       'key': 'Candidate Three',
+       'color': '#fff',
+       'candidateId': 'candidate3'},
 
     ]
-    lineChartSeriesService = jasmine.createSpyObj('SvLineChartSeriesService', ['getLineChartSeries']);
+    lineChartSeriesService = jasmine.createSpyObj('SvLineChartSeriesService', ['getLineChartSeries', 'filter']);
     getLineChartSeriesSpy = lineChartSeriesService.getLineChartSeries.and.returnValue(of(lineChartSeries));
+    filterSpy = lineChartSeriesService.filter.and.returnValue(lineChartSeries.slice(0,2));
 
     TestBed.configureTestingModule({
       declarations: [ CmpGraphComponent,
@@ -45,41 +54,27 @@ xdescribe('CmpGraphComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CmpGraphComponent);
     component = fixture.componentInstance;
-    component.candidatesIds = ['candidate-one']
+    component.candidatesIds = ['candidate1', 'candidate2']
     component.category = "some-category"
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
   it('should get LineChartSeries and pass the data to the nvd3 component', () =>{
-    expect(getLineChartSeriesSpy).toHaveBeenCalledWith(component.candidatesIds, component.category);
-    expect(getLineChartSeriesSpy).toHaveBeenCalledTimes(1);
+    expect(getLineChartSeriesSpy).toHaveBeenCalledWith(component.category);
+    expect(getLineChartSeriesSpy).toHaveBeenCalledTimes(1);    
+    expect(filterSpy).toHaveBeenCalledWith(lineChartSeries, component.candidatesIds);
+    expect(filterSpy).toHaveBeenCalledTimes(1);
     const nvd3El = fixture.debugElement.query(By.css('nvd3'));
-    expect(nvd3El.componentInstance.data).toEqual(lineChartSeries)
+    expect(nvd3El.componentInstance.data).toEqual(lineChartSeries.slice(0,2))
 
   });
 
   it('should refresh nvd3 when component.candidatesIds changes', () =>{
-    lineChartSeries = [
-      {'values': [ 
-        {'y': 0, 'x': new Date('2018-01-01')},],
-       'key': 'Candidate One',
-       'color': '#888'},
-      {'values': [ 
-        {'y': 0, 'x': new Date('2018-01-01')},],
-       'key': 'Candidate Two',
-       'color': '#888'},
-    ]
-    getLineChartSeriesSpy = lineChartSeriesService.getLineChartSeries.and.returnValue(of(lineChartSeries));
-    component.candidatesIds = ['candidate-one', 'candidate-two'];
+    filterSpy = lineChartSeriesService.filter.and.returnValue(lineChartSeries.slice(1,3));
+    component.candidatesIds = ['candidate2', 'candidate3'];
     fixture.detectChanges();
-    expect(getLineChartSeriesSpy).toHaveBeenCalledWith(component.candidatesIds, component.category);
-    expect(getLineChartSeriesSpy).toHaveBeenCalledTimes(2);
     const nvd3El = fixture.debugElement.query(By.css('nvd3'));
-    expect(nvd3El.componentInstance.data).toEqual(lineChartSeries)
+    expect(nvd3El.componentInstance.data).toEqual(lineChartSeries.slice(1,3))
 
   });
 
