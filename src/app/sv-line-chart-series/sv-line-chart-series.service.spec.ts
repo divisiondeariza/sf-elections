@@ -50,7 +50,7 @@ describe('SvLineChartSeriesService', () => {
     expect(service).toBeTruthy();
   }));
 
-  xit('should get line chart series given a category and some candidates ids', 
+  it('should get line chart series given a category and some candidates ids', 
   	inject([SvLineChartSeriesService], (service: SvLineChartSeriesService) => {
     const expectedSeries:LineChartSerie[] = [
     	{'values': [ 
@@ -67,12 +67,43 @@ describe('SvLineChartSeriesService', () => {
     		{'y': 5, 'x': new Date('2018-01-03')},
     		],
     	 'key': 'Candidate Two',
-       'candidateId': 'candidate1',
+       'candidateId': 'candidate2',
        'color': "#888"},
     ]
 
   	service.getLineChartSeries('category')
   		.subscribe(series => expect(series).toEqual(expectedSeries))
 
+  }));
+
+  it('should filter an array of line chart series given an array of candidatesIds',
+   inject([SvLineChartSeriesService], (service: SvLineChartSeriesService) => {
+    const series:LineChartSerie[] = [
+      {'values': [],
+       'key': 'Candidate One',
+       'candidateId': 'candidate1',
+       'color': "#fff"},
+      {'values': [],
+       'key': 'Candidate Two',
+       'candidateId': 'candidate2',
+       'color': "#888"},
+      {'values': [],
+       'key': 'Candidate Three',
+       'candidateId': 'candidate3',
+       'color': "#888"},
+    ]
+
+    const filteredSeries = service.filter(series, ["candidate1", "candidate2"]);
+    const expectedFilteredSeries = [
+      {'values': [],
+       'key': 'Candidate One',
+       'candidateId': 'candidate1',
+       'color': "#fff"},
+      {'values': [],
+       'key': 'Candidate Two',
+       'candidateId': 'candidate2',
+       'color': "#888"},
+    ];
+    expect(filteredSeries).toEqual(expectedFilteredSeries);
   }));
 });

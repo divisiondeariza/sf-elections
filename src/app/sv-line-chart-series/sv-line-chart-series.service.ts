@@ -26,6 +26,10 @@ export class SvLineChartSeriesService {
 
   }
 
+  filter(series:LineChartSerie[], candidatesIds:String[]){
+    return series.filter(serie => candidatesIds.indexOf(serie.candidateId)!=-1);
+  }
+
   private join(candidates, timeSeries):LineChartSerie[]{
   	return timeSeries.map(timeSerie => this.remapTimeSerie(timeSerie, candidates));
   }
